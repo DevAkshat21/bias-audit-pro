@@ -8,8 +8,12 @@ import uuid
 import traceback
 import os
 from sqlalchemy.orm import Session
-from ai_service import AIService, AIServiceException
-from database import get_db, AuditSession
+try:
+    from .ai_service import AIService, AIServiceException
+    from .database import get_db, AuditSession
+except ImportError:
+    from ai_service import AIService, AIServiceException
+    from database import get_db, AuditSession
 
 app = FastAPI(title="BiasAudit Pro API", version="1.0.0")
 ai_service = AIService()
