@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { BiasMetric, ProxyAnalysis } from '../data/mockData';
+import type { BiasMetric, ProxyAnalysis, GroupData } from '../types';
 import { AlertCircle, CheckCircle2, ChevronRight, Info } from 'lucide-react';
 import { clsx } from 'clsx';
 
@@ -128,7 +128,7 @@ export const BiasDetection: React.FC<BiasDetectionProps> = ({ biasData }) => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-outline-variant">
-                {data.groups.map((group) => (
+                {data.groups.map((group: GroupData) => (
                   <tr key={group.group_name} className="hover:bg-[#f6faff] transition-colors">
                     <td className="px-lg py-4 text-sm font-medium text-on-surface">{group.group_name}</td>
                     <td className="px-lg py-4 text-sm text-on-surface-variant">{(group.selection_rate * 100).toFixed(1)}%</td>

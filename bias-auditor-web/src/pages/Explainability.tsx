@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ProxyAnalysis } from '../data/mockData';
+import type { ProxyAnalysis, ProxyRisk, FeatureImportance } from '../types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { AlertTriangle, Info } from 'lucide-react';
 
@@ -9,7 +9,7 @@ interface ExplainabilityProps {
 }
 
 export const Explainability: React.FC<ExplainabilityProps> = ({ proxyData, explainabilityData }) => {
-  const allHighRiskProxies = Object.values(proxyData || {}).flatMap(p => p.high_risk?.map(r => r.feature.toLowerCase()) || []);
+  const allHighRiskProxies = Object.values(proxyData || {}).flatMap((p: ProxyAnalysis) => p.high_risk?.map((r: ProxyRisk) => r.feature.toLowerCase()) || []);
   
   const isSkipped = explainabilityData?.status === 'skipped';
   const importanceData = explainabilityData?.data?.feature_importance || [];
@@ -58,7 +58,7 @@ export const Explainability: React.FC<ExplainabilityProps> = ({ proxyData, expla
                     contentStyle={{ borderRadius: '8px', border: '1px solid #c4c6cf' }}
                   />
                   <Bar dataKey="importance" radius={[0, 4, 4, 0]} barSize={24}>
-                    {sortedFeatures.map((entry, index) => (
+                    {sortedFeatures.map((entry: FeatureImportance, index: number) => (
                       <Cell 
                         key={`cell-${index}`} 
                         fill={allHighRiskProxies.includes(entry.feature.toLowerCase()) ? '#ba1a1a' : '#022448'} 
@@ -84,9 +84,9 @@ export const Explainability: React.FC<ExplainabilityProps> = ({ proxyData, expla
 
           <h3 className="text-lg font-semibold text-on-surface">Proxy Risk Scanner</h3>
           
-          {Object.entries(proxyData || {}).map(([attr, info]) => (
+          {Object.entries(proxyData || {}).map(([attr, info]: [string, ProxyAnalysis]) => (
             <React.Fragment key={attr}>
-              {info.high_risk?.map((proxy) => (
+              {info.high_risk?.map((proxy: ProxyRisk) => (
                 <div key={`${attr}-${proxy.feature}`} className="bg-white border border-outline-variant border-l-4 border-l-error rounded-lg p-lg shadow-sm">
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-bold text-on-surface text-base">{proxy.feature}</h4>
