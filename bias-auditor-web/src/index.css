@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #022448;
+  --color-primary-container: #1e3a5f;
+  --color-on-primary-container: #8aa4cf;
+  --color-background: #f6faff;
+  --color-surface: #ffffff;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-warning: #F39C12;
+  --color-success: #2ECC71;
+  --color-outline: #c4c6cf;
+  --color-outline-variant: #c4c6cf;
+  --color-on-surface: #141d23;
+  --color-on-surface-variant: #43474e;
+  
+  --font-inter: "Inter", sans-serif;
+  
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-base: 8px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+}
+
+:root {
+  font-family: var(--font-inter);
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Material Symbols Outlined */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* Indeterminate progress bar animation for loading overlay */
+@keyframes progress {
+  0%   { transform: translateX(-100%); width: 60%; }
+  50%  { transform: translateX(80%);  width: 60%; }
+  100% { transform: translateX(-100%); width: 60%; }
+}
